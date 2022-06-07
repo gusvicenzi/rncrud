@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native'
 import { Button, Icon } from '@rneui/base'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import UserList from './views/UserForm'
+import UserList from './views/UserList'
 import UserForm from './views/UserForm'
 // import Ionicons from 'react-native-vector-icons/Ionicons'
 
