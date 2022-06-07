@@ -1,9 +1,23 @@
 import { Avatar, Icon, ListItem, Button } from '@rneui/base'
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, Alert } from 'react-native'
 import users from '../data/users'
 
 export default props => {
+  function confirmUserDeletion(user) {
+    Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
+      {
+        text: 'Sim',
+        onPress() {
+          console.warn('Deletou' + user.id)
+        },
+      },
+      {
+        text: 'Não',
+      },
+    ])
+  }
+
   function getUserItem({ item: user }) {
     return (
       <ListItem.Swipeable
@@ -37,7 +51,7 @@ export default props => {
         )}
         rightContent={reset => (
           <Button
-            onPress={() => console.warn('Deletado')}
+            onPress={() => confirmUserDeletion(user)}
             type="solid"
             buttonStyle={{
               backgroundColor: 'red',
