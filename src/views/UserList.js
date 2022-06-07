@@ -1,4 +1,4 @@
-import { Avatar, ListItem } from '@rneui/base'
+import { Avatar, Icon, ListItem, Button } from '@rneui/base'
 import React from 'react'
 import { View, Text, FlatList } from 'react-native'
 import users from '../data/users'
@@ -6,7 +6,62 @@ import users from '../data/users'
 export default props => {
   function getUserItem({ item: user }) {
     return (
-      <ListItem
+      <ListItem.Swipeable
+        leftContent={reset => (
+          <Button
+            onPress={() => props.navigation.navigate('UserForm', user)}
+            type="solid"
+            title="Edit"
+            buttonStyle={{
+              minHeight: '100%',
+            }}
+            icon={{
+              name: 'edit',
+              type: 'material-icons',
+              size: 25,
+              color: 'white',
+            }}
+
+            // <Icon
+            //   name="edit"
+            //   color="white"
+            //   style={{
+            //     fontSize: 30,
+            //     minHeight: '100%',
+            //     justifyContent: 'center',
+            //     marginRight: 5,
+            //   }}
+            // />
+            // }
+          />
+        )}
+        rightContent={reset => (
+          <Button
+            onPress={() => console.warn('Deletado')}
+            type="solid"
+            buttonStyle={{
+              backgroundColor: 'red',
+              minHeight: '100%',
+            }}
+            icon={{
+              name: 'delete',
+              type: 'material-icons',
+              size: 25,
+              color: 'white',
+            }}
+            // icon={
+            //   <Icon
+            //     name="delete"
+            //     color="white"
+            //     style={{
+            //       minHeight: '100%',
+            //       justifyContent: 'center',
+            //       fontSize: 35,
+            //     }}
+            //   />
+            // }
+          />
+        )}
         bottomDivider
         onPress={() => props.navigation.navigate('UserForm')}>
         <Avatar
@@ -17,17 +72,7 @@ export default props => {
           <ListItem.Title>{user.name}</ListItem.Title>
           <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
         </ListItem.Content>
-        <ListItem.Chevron
-          onPress={() => props.navigation.navigate('UserForm', user)}
-          iconProps={{ name: 'edit' }}
-          iconStyle={{ fontSize: 25, color: 'orange' }}
-        />
-        <ListItem.Chevron
-          onPress={() => console.warn('Deletado')}
-          iconProps={{ name: 'delete' }}
-          iconStyle={{ fontSize: 25, color: 'red' }}
-        />
-      </ListItem>
+      </ListItem.Swipeable>
     )
   }
 
