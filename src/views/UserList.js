@@ -1,9 +1,11 @@
 import { Avatar, Icon, ListItem, Button } from '@rneui/base'
-import React from 'react'
-import { View, Text, FlatList, Alert } from 'react-native'
-import users from '../data/users'
+import React, { useContext } from 'react'
+import { View, FlatList, Alert } from 'react-native'
+import UsersContext from '../context/UsersContext'
 
 export default props => {
+  const { state } = useContext(UsersContext)
+
   function confirmUserDeletion(user) {
     Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
       {
@@ -63,21 +65,10 @@ export default props => {
               size: 25,
               color: 'white',
             }}
-            // icon={
-            //   <Icon
-            //     name="delete"
-            //     color="white"
-            //     style={{
-            //       minHeight: '100%',
-            //       justifyContent: 'center',
-            //       fontSize: 35,
-            //     }}
-            //   />
-            // }
           />
         )}
         bottomDivider
-        onPress={() => props.navigation.navigate('UserForm')}>
+        onPress={() => props.navigation.navigate('UserForm', user)}>
         <Avatar
           title={user.name}
           source={{ uri: user.avatarUrl }}
@@ -94,7 +85,7 @@ export default props => {
     <View>
       <FlatList
         keyExtractor={user => user.id.toString()}
-        data={users}
+        data={state.users}
         renderItem={getUserItem}
       />
     </View>
