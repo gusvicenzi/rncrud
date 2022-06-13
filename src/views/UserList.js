@@ -4,14 +4,17 @@ import { View, FlatList, Alert } from 'react-native'
 import UsersContext from '../context/UsersContext'
 
 export default props => {
-  const { state } = useContext(UsersContext)
+  const { state, dispatch } = useContext(UsersContext) // context API and useReducer
 
   function confirmUserDeletion(user) {
     Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
       {
         text: 'Sim',
         onPress() {
-          console.warn('Deletou' + user.id)
+          dispatch({
+            type: 'deleteUser',
+            payload: user,
+          }) // useReducer
         },
       },
       {
